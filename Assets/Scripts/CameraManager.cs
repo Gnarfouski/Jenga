@@ -17,6 +17,8 @@ public class CameraManager : MonoBehaviour
     private Vector3? _lastMousePosition = null;
     private int _currentStack;
 
+    public int CurrentStack => _currentStack;
+
     public void Focus(int index)
     {
         _currentStack = index;
@@ -64,6 +66,19 @@ public class CameraManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
             PreviousStack();
+        }
+
+        if(Input.GetMouseButtonDown(1))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                if(hit.transform.GetComponent<Stack>() != null)
+                {
+                    GetComponent<UIManager>().LoadData(hit.transform.GetComponent<Stack>().Data);
+                }
+            }
         }
     }
 
