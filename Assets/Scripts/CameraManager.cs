@@ -15,10 +15,12 @@ public class CameraManager : MonoBehaviour
     private Vector3 _target;
     private bool _isMoving = false;
     private Vector3? _lastMousePosition = null;
+    private int _currentStack;
 
     public void Focus(int index)
     {
-        transform.position = _starts[index].position;
+        _currentStack = index;
+        Camera.main.transform.position = _starts[index].position;
         _target = _targets[index].position;
         LookAtTarget();
     }
@@ -54,6 +56,27 @@ public class CameraManager : MonoBehaviour
             }
             _lastMousePosition = Input.mousePosition;
         }
+
+        if(Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            NextStack();
+        }
+        if(Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            PreviousStack();
+        }
+    }
+
+    private void NextStack()
+    {
+        _currentStack = (_currentStack + 1) % 3;
+        Focus(_currentStack);
+    }
+
+    private void PreviousStack()
+    {
+        _currentStack = (_currentStack + 2) % 3;
+        Focus(_currentStack);
     }
 
     private void LookAtTarget()
