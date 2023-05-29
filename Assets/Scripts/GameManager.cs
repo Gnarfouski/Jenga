@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         }
 
         GetComponent<StackManager>().Generate(_stacks.Values.ToList());
+        GetComponent<CameraManager>().Focus(0);
     }
 
     private List<CourseData> GetCoursePack()

@@ -7,15 +7,15 @@ public class StackManager : MonoBehaviour
     [SerializeField]
     private GameObject _piecePrefab;
     [SerializeField]
-    private Transform _6start, _7start, _8start;
+    private Transform[] _starts;
     [SerializeField]
     private Material[] _materials;
 
     public void Generate(List<StackData> stacks)
     {
-        GenerateStack(_6start, stacks[0]);
-        GenerateStack(_7start, stacks[1]);
-        GenerateStack(_8start, stacks[2]);
+        GenerateStack(_starts[0], stacks[0]);
+        GenerateStack(_starts[1], stacks[1]);
+        GenerateStack(_starts[2], stacks[2]);
     }
 
     private void GenerateStack(Transform start, StackData stackData)
